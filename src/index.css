@@ -27,7 +27,7 @@ code {
 }
 
 .container {
-	max-width: 960px;
+	max-width: 1000px;
 	margin-right: auto;
 	margin-left: auto;
 	padding-right: 15px;
@@ -45,13 +45,13 @@ code {
 }
 
 .note.new {
-	background-color: #ee84e5;
+	background-color: #e7e5eb;
 }
 
 textarea {
 	border: none;
 	resize: none;
-	background-color: #ee84e5;
+	background-color:#e7e5eb;
 }
 
 textarea:focus {
@@ -63,6 +63,7 @@ textarea:focus {
 	border: none;
 	border-radius: 15px;
 	padding: 5px 10px 5px 10px;
+	margin-left: 100px;
 }
 
 .save:hover {
@@ -83,13 +84,31 @@ textarea:focus {
 
 .note-footer {
 	display: flex;
-	align-items: center;
-	justify-content: space-between;
+	flex-basis: auto;
+	flex-direction: row;
 }
 
 .delete-icon {
 	cursor: pointer;
+}
+
+.date-time{
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-start;
+
+}
+
+.date{
 	
+		font-size: 15px;
+		
+	
+}
+
+.time{
+	font-size: 15px;
+
 }
 
 .search {
@@ -105,6 +124,7 @@ textarea:focus {
 	border: none;
 	background-color: rgb(233, 233, 233);
 	width: 100%;
+	
 }
 
 .search input:focus {
@@ -119,7 +139,14 @@ textarea:focus {
 
 
 .quote-container {
-	color:grey;
+	color:black;
+	background-color: #e7e5eb;
+	border : 2px;
+	border: transparent;
+	border-radius: 4px;
+	padding: 6px;
+	height: 100px;
+	
 }
 
 .edit-textarea{
@@ -160,3 +187,30 @@ textarea:focus {
 font-size: x-large;
 font-weight: 200;
 }
+
+.icons{
+	/* margin: 10px;
+	padding: 10px; */
+	display: flex;
+	flex-direction:row;
+	align-items: center;
+}
+
+.next-quote-btn {
+	padding: 10px 20px;
+	background-color: #9382c2;
+	color: white;
+	border: none;
+	cursor: pointer;
+	font-size: 16px;
+	border-radius: 20px;
+  }
+  
+  .next-quote-btn:hover {
+	background-color: #0056b3;
+  }
+
+  .preview-img{
+	width: 5%;
+	height: 5%;
+  }
