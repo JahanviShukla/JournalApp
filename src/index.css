@@ -52,6 +52,7 @@ textarea {
 	border: none;
 	resize: none;
 	background-color:#e7e5eb;
+	box-shadow: rgb(145, 146, 146);
 }
 
 textarea:focus {
@@ -63,7 +64,8 @@ textarea:focus {
 	border: none;
 	border-radius: 15px;
 	padding: 5px 10px 5px 10px;
-	margin-left: 100px;
+	margin-left: 250px;
+	width: 50px;
 }
 
 .save:hover {
@@ -72,7 +74,7 @@ textarea:focus {
 }
 
 .note {
-	background-color: #b9a3e2;
+	background-color: #cde1f5f8;
 	border-radius: 10px;
 	padding: 1rem;
 	min-height: 170px;
@@ -81,34 +83,56 @@ textarea:focus {
 	justify-content: space-between;
 	white-space: pre-wrap;
 }
-
+.note:hover{
+	opacity: 0.8;
+}
 .note-footer {
 	display: flex;
-	flex-basis: auto;
-	flex-direction: row;
+  flex-direction: row;
+  justify-content: space-between;
+  /* font-style: italic; */
 }
 
 .delete-icon {
 	cursor: pointer;
+	margin-left:10px;
+	color: rgb(155, 74, 74);
+}
+
+.delete-icon:hover{
+	opacity: 0.5;
+}
+
+.edit-icon{
+	cursor: pointer;
+	margin-left:10px;
+	color: #0056b3;
+}
+
+.edit-icon:hover{
+	opacity: 0.5;
 }
 
 .date-time{
 	display: flex;
-	flex-direction: row;
-	justify-content: flex-start;
+	align-items: center;
+	justify-content: flex-end;
+	gap:1rem;
+
 
 }
 
-.date{
-	
+.date{	
 		font-size: 15px;
-		
-	
+		/* border: 1px solid black; */
+		/* padding: 2px; */
+		/* font-style: none; */
 }
 
 .time{
 	font-size: 15px;
-
+	font-style: italic;
+	/* border: 1px solid black; */
 }
 
 .search {
@@ -132,11 +156,10 @@ textarea:focus {
 }
 
 
-.edit-icon{
-	cursor: pointer;
-	margin-left:150px;
+.search:hover{
+	opacity: 0.8;
+	
 }
-
 
 .quote-container {
 	color:black;
@@ -198,7 +221,7 @@ font-weight: 200;
 
 .next-quote-btn {
 	padding: 10px 20px;
-	background-color: #9382c2;
+	background-color: #c6b5f7;
 	color: white;
 	border: none;
 	cursor: pointer;
@@ -210,7 +233,19 @@ font-weight: 200;
 	background-color: #0056b3;
   }
 
-  .preview-img{
-	width: 5%;
-	height: 5%;
-  }
+.msg{
+	color: #9585c7;
+	background-color: #ededed;
+	padding: 20px;
+	border-radius: 10px;
+	margin: 10px;
+}
+.main{
+	/* margin: 20px; */
+	/* padding: 20px; */
+	/* background-color: #f0f0f0; */
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+
+}

@@ -1,10 +1,18 @@
 import { useState } from 'react';
 import { toast } from 'react-toastify';
 
+
 const AddNote = ({ handleAddNote }) => {
     const [noteText, setNoteText] = useState('');
+    // const [color,setColor] = useState('#FFFFF')
     const characterLimit = 200;
 
+
+    // const handleColorChange =(event) =>{
+    //     setColor(event.target.value)
+        
+    // }
+    
     const handleChange = (event) => {
         if (characterLimit - event.target.value.length >= 0) {
             setNoteText(event.target.value);
@@ -29,8 +37,11 @@ const AddNote = ({ handleAddNote }) => {
                 placeholder='I am grateful for...'
                 value={noteText}
                 onChange={handleChange}
+                className='heading'
             ></textarea>
-            <div className='note-footer'>
+        
+        {/* <input type='color' value={color} onChange={handleColorChange}/> */}
+       
                 <small>
                     {characterLimit - noteText.length} Remaining
                 </small>
@@ -38,7 +49,7 @@ const AddNote = ({ handleAddNote }) => {
                     Save
                 </button>
             </div>
-        </div>
+        
     );
 };
 

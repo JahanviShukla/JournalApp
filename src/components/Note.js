@@ -1,21 +1,36 @@
-import { MdDelete } from 'react-icons/md';
+import { MdDeleteForever } from "react-icons/md";
 import { FaEdit } from "react-icons/fa";
+import { MdOutlinePushPin } from "react-icons/md";
+import { BsFillPinFill } from "react-icons/bs";
 
-const Note = ({ id, text, date, time, handleUpload, handleDeleteNote, handleEditNote }) => {
+const Note = ({ id,text, date, time, handleUnPinNote, handleFillPinNote, handleDeleteNote, handleEditNote, isPinned }) => {
     return (
         <div className='note'>
-            <span>{text}</span>
+           <div className="main">
+           <span>{text}</span>
+           {isPinned ? (
+                       <BsFillPinFill
+                       onClick={() => handleUnPinNote(id)} // Pin action
+                       className='fill-pin-icon'
+                       size='1.3em'
+                   />
+                    ) : (
+                       
+
+                        <MdOutlinePushPin
+                            onClick={() => handleFillPinNote(id)} // Unpin action
+                            className='pin-icon'
+                            size='1.3em'
+                        />
+                    )}
+                    
+           </div>
+            
             <div className='note-footer'>
                 <div className='date-time'>
                     <small className='date'>{date}</small>
                     <p className='time'>{time}</p>
-                </div>
-
-                <div className="uploadbtn">
-                    <input id="input-file" className="d-none" type="file" onChange={handleUpload} />
-                    <button className="btn btn-outline-primary">
-                        Upload
-                    </button>
+                   
                 </div>
 
                 <div className='icons'>
@@ -24,11 +39,15 @@ const Note = ({ id, text, date, time, handleUpload, handleDeleteNote, handleEdit
                         size='1.3em'
                         onClick={() => handleEditNote(id)}
                     />
-                    <MdDelete
+                    <MdDeleteForever
                         onClick={() => handleDeleteNote(id)}
                         className='delete-icon'
                         size='1.3em'
                     />
+
+
+                        
+                    
                 </div>
             </div>
         </div>

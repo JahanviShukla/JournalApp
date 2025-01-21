@@ -7,27 +7,35 @@ const Noteslist = ({
     handleEditNote,
     handleUpdateNote,
     handleDeleteNote,
+    handleUnPinNote,
+    handleFillPinNote
 }) => {
+    // Separate pinned and unpinned notes
+    const pinnedNotes = notes.filter(note => note.isPinned);
+    const unpinnedNotes = notes.filter(note => !note.isPinned);
+
     return (
         <div className='notes-list'>
+            <AddNote handleAddNote={handleAddNote} />
             {notes.length > 0 ? (
-                notes.map((note) => (
+                [...pinnedNotes, ...unpinnedNotes].map((note) => (
                     <Note
                         key={note.id}
                         id={note.id}
                         text={note.text}
                         date={note.date}
                         time={note.time}
-                        handleUpload={note.handleUpload}
                         handleEditNote={handleEditNote}
                         handleUpdateNote={handleUpdateNote}
                         handleDeleteNote={handleDeleteNote}
+                        handleUnPinNote={handleUnPinNote}
+                        handleFillPinNote={handleFillPinNote}
+                        isPinned={note.isPinned} // Pass the correct isPinned state
                     />
                 ))
             ) : (
-                <p>No notes available</p>
+                <p className='msg'>No notes available</p>
             )}
-            <AddNote handleAddNote={handleAddNote} />
         </div>
     );
 };

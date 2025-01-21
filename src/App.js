@@ -14,9 +14,7 @@ const App = () => {
     const [searchText, setSearchText] = useState('');
     const [data, setData] = useState({});
     const [darkMode, setDarkMode] = useState(false);
-    const [inputFile, setInputFile] = useState('');
-    const [filePreview, setFilePreview] = useState('');
-
+  
     const getNewQuote = () => {
         axios
             .get('https://dummyjson.com/quotes/random')
@@ -47,14 +45,6 @@ const App = () => {
             return;
         }
 
-        const handleUpload = (e) => {
-            const file = e.target.files[0];
-            if (file) {
-                setInputFile(file);
-                setFilePreview(URL.createObjectURL(file));
-            }
-        };
-
         const date = new Date();
         const showTime = date.getHours() + ':' + date.getMinutes();
         const newNote = {
@@ -62,13 +52,13 @@ const App = () => {
             text: text,
             date: date.toLocaleDateString(),
             time: showTime,
-            handleUpload: handleUpload(inputFile),
+            isPinned: false // Initialize isPinned state
         };
 
         axios
             .post('http://localhost:5000/notes', newNote)
             .then((response) => {
-                setNotes([...notes, response.data]);
+                setNotes([response.data, ...notes]); // Prepend the new note
                 toast.success('Note saved successfully!');
             })
             .catch((error) => {
@@ -121,6 +111,46 @@ const App = () => {
             });
     };
 
+
+const handleFillPinNote = (id)=> {
+   setNotes((prevNotes) => {
+       const noteToPin = prevNotes.map((note, index) => {
+           if (note.id === id) // this checks that whteter the current note id = id passed by a function
+            {
+               return {
+                   ...note,
+                   isPinned: true,
+                   originalIndex: index, // Store the original index when note is pinned
+               }; // new note obj with same properties as original note
+           }
+           return note;
+       });
+
+       return noteToPin.sort((a, b) => b.isPinned - a.isPinned); // Sort by pinned status
+   });
+};
+
+const handleUnPinNote = (id)=> {
+   setNotes((prevNotes) => {
+       const noteToUnpin = prevNotes.find(note => note.id === id);
+    //    if (!noteToUnpin.originalIndex) return prevNotes; // Safety check
+
+       noteToUnpin.isPinned = false; // Mark the note as unpinned
+
+       const filteredNotes = prevNotes.filter(note => note.id !== id); // conatins allnote except unpinned one
+
+       // Reinsert the note at its original index
+       return [
+           ...filteredNotes.slice(0, noteToUnpin.originalIndex),// all notes from start of fn upto originalindex of note being unpinned
+           noteToUnpin, // note that is being unpinned
+           ...filteredNotes.slice(noteToUnpin.originalIndex) // all the remaining notes in FN starting from OI of note being unpinned
+       ];
+   });
+};
+
+
+
+
     return (
         <div className={`${darkMode && 'dark-mode'}`}>
             <div className="container">
@@ -140,7 +170,6 @@ const App = () => {
 
                 <Search handleSearchNote={setSearchText} />
                 
-
                 {editId ? (
                     <div className="edit-note">
                         <input
@@ -164,15 +193,11 @@ const App = () => {
                         handleEditNote={editNote}
                         handleUpdateNote={updateNote}
                         handleDeleteNote={deleteNote}
+                        handleUnPinNote={handleUnPinNote} 
+                        handleFillPinNote={handleFillPinNote}
                     />
                 )}
 
-                {filePreview && (
-                    <div className="file-preview">
-                        <h3>File Preview:</h3>
-                        <img src={filePreview} alt="File Preview" className='preview-img' />
-                    </div>
-                )}
             </div>
             <ToastContainer />
         </div>
